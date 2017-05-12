@@ -1,0 +1,32 @@
+[Unit]
+Description=mock_api_stu3_service
+
+[Service]
+User={{hosting_username}}
+TimeoutStartSec=infinity
+WorkingDirectory={{hosting_user_home}}/mock_api_stu3
+
+ExecStart={{java_home}}/bin/java \
+ -Xms{{api_stu3_server_initial_memory}} \
+ -Xmx{{api_stu3_server_max_memory}} \
+ -Dserver.port={{mock_api_stu3_server_port}} \
+ -Dspring.profiles.active=multitenant,stu3,mock \
+ -Dhspc.platform.api.fhir.db.host={{mysql_host}} \
+ -Dhspc.platform.api.fhir.db.username={{mysql_user}} \
+ -Dhspc.platform.api.fhir.db.password={{mysql_pass}} \
+ -Dhspc.platform.api.sandbox.useHspcStarterData=false \
+ -Dhspc.platform.api.security.mode={{mock_api_stu3_server_security_mode}} \
+ -Dhspc.platform.authorization.url={{auth_server_url}} \
+ -Dhspc.platform.messaging.url={{messaging_server_url}} \
+ -Dhspc.platform.api.sandbox.name={{api_stu3_server_sandbox}} \
+ -Dhibernate.search.default.indexBase={{hosting_user_home}}/mock_api_stu3/index \
+{% if use_secure_http and not use_custom_ssl_certificates %}
+ -Dserver.ssl.key-store={{hosting_user_home}}/keystore \
+ -Dserver.ssl.key-store-password={{keystore_password}} \
+ -Dserver.ssl.keyStoreType=JKS \
+{% endif %}
+ -jar {{api_stu3_server_artifact_artifact_id}}-{{api_stu3_server_artifact_version}}.{{api_stu3_server_artifact_packaging}}
+Restart=always
+
+[Install]
+WantedBy=multi-user.target

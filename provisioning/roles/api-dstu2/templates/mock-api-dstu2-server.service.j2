@@ -2,7 +2,7 @@
 Description=API-DSTU2-Service
 
 [Service]
-User={{username}}
+User={{hosting_username}}
 TimeoutStartSec=infinity
 WorkingDirectory={{api_dstu2_webapp_info.war_location}}
 
@@ -31,7 +31,7 @@ ExecStart={{java_home}}/bin/java \
  -Dhspc.platform.api.sandbox.name={{api_dstu2_server_smart_sandbox}} \
  -Dhibernate.search.default.indexBase={{api_dstu2_webapp_info.war_location}}/mock-index \
 {% if use_secure_http and not use_custom_ssl_certificates %}
- -Djavax.net.ssl.trustStore="{{install_dir}}/keystore" \
+ -Djavax.net.ssl.trustStore="{{hosting_user_home}}/keystore" \
  -Djavax.net.ssl.trustStorePassword="{{keystore_password}}" \
 {% endif %}
  -jar {{api_dstu2_webapp_info.artifact_id}}-{{api_dstu2_webapp_info.version}}.{{api_dstu2_webapp_info.packaging}}

@@ -21,12 +21,28 @@ app_server_host: "{{services_host}}"
 app_server_port: "9093"
 
 api_dstu2_server_host: "{{services_host}}"
-api_dstu2_server_port: "9070"
+api_dstu2_server_port: "9071"
 api_dstu2_server_name: "SMART-on-FHIR FHIR DSTU2 Server"
 
 persona_api_dstu2_server_host: "{{services_host}}"
-persona_api_dstu2_server_port: "9071"
-persona_api_dstu2_server_name: "SMART-on-FHIR FHIR DSTU2 Server"
+persona_api_dstu2_server_port: "9171"
+persona_api_dstu2_server_name: "SMART-on-FHIR Persona FHIR DSTU2 Server"
+
+mock_api_dstu2_server_host: "{{services_host}}"
+mock_api_dstu2_server_port: "9271"
+mock_api_dstu2_server_name: "SMART-on-FHIR Mock FHIR DSTU2 Server"
+
+api_stu3_server_host: "{{services_host}}"
+api_stu3_server_external_port: "9074"
+api_stu3_server_name: "SMART-on-FHIR FHIR STU3 Server"
+
+persona_api_stu3_server_host: "{{services_host}}"
+persona_api_stu3_server_external_port: "9174"
+persona_api_stu3_server_name: "SMART-on-FHIR Persona FHIR STU3 Server"
+
+mock_api_stu3_server_host: "{{services_host}}"
+mock_api_stu3_server_external_port: "9274"
+mock_api_stu3_server_name: "SMART-on-FHIR Mock FHIR STU3 Server"
 
 sandbox_manager_server_host: "{{services_host}}"
 sandbox_manager_server_port: "9080"
@@ -37,7 +53,7 @@ auth_server_password: "secret"
 auth_server_newUserUrl: ""
 
 persona_auth_server_host: "{{services_host}}"
-persona_auth_server_port: "9061"
+persona_auth_server_port: "9161"
 persona_auth_server_newUserUrl: ""
 
 messaging_server_host: "{{services_host}}"

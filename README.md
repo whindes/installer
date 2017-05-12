@@ -24,8 +24,8 @@ The SMART on FHIR platform is tested on Ubuntu 16.04.  Other linux-based systems
 When complete, you will have a SMART on FHIR platform!
 
 * `{host}:9080/` for the Sandbox Manager application
-* `{host}:9070/api/smartdstu2/data` for a FHIR DSTU2 API server
-* `{host}:9070/api/smartdstu2/data/metadata` for the FHIR DSTU2 API conformance
+* `{host}:9071/api/smartdstu2/data` for a FHIR DSTU2 API server
+* `{host}:9071/api/smartdstu2/data/metadata` for the FHIR DSTU2 API conformance
 * `{host}:9060/auth/` for an OAuth2 authorization server
 * `{host}:9093` for a SMART apps server
 * `{host}:10389` for an ApacheDS LDAP server
@@ -204,15 +204,21 @@ Please contact each of these open-source projects with further questions.
 
 Here is the exact configuration we use to test the installer using an AWS EC2 instance.  The ports must all be open for inbound connections in the security group.
 
-| Item          | Value                   |
-| ------------- | -----------------------:|
-| Instance Type | t2.large                |
-| AIM           | Ubuntu Server 16.04 LTS |
-| SSH PORT      | 22                      |
-| HTTP PORT     | 80                      |
-| HTTPS PORT    | 443                     |
-| LDAP PORT     | 10389                   |
-| APPS PORTS    | 9070-9099               |
+| Item            | Value                   |
+| --------------- | -----------------------:|
+| Instance Type   | t2.large                |
+| AIM             | Ubuntu Server 16.04 LTS |
+| SSH PORT        | 22                      |
+| HTTP PORT       | 80                      |
+| HTTPS PORT      | 443                     |
+| AUTH PORTS      | 9060, 9160              |
+| API DSTU2 PORTS | 9071, 9171, 9271        |
+| API STU3 PORTS  | 9074, 9174, 9274        |
+| SANDBOX PORTS   | 9080                    |
+| MESSAGING PORTS | 9091                    |
+| PWM PORTS       | 9092                    |
+| APPS PORTS      | 9093                    |
+| LDAP PORT       | 10389                   |
 
 Here is the custom_settings.yml file:
 ```

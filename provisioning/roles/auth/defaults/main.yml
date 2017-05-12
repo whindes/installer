@@ -8,25 +8,18 @@ auth_server_webapp_info:
   artifact_id: "hspc-reference-auth-server-ldap-webapp"
   version: "1.2"
   packaging: "war"
-  war_location: "{{hspc_install_dir}}/org/hspconsortium/reference/hspc-reference-auth-server-ldap-webapp/1.2"
+  war_location: "{{hosting_user_home_hspc}}/org/hspconsortium/reference/hspc-reference-auth-server-ldap-webapp/1.2"
 
 # Projects
 auth_server_project_info:
   target:
-    base_folder: "{{hspc_install_dir}}"
+    base_folder: "{{hosting_user_home_hspc}}"
     name: "reference-authorization"
-    folder: "{{hspc_install_dir}}/reference-authorization"
-
-# Version control information
-auth_branch: "master"
-# reference-auth-server-webapp is cloned to gain the SQL install files
-auth_webapp_project: "reference-auth-server-webapp-deprecated"
-# reference-auth-server-webapp is cloned to gain the sourcecode to build the application
-auth_webapp_ldap_project: "reference-auth-server-ldap-webapp-deprecated"
+    folder: "{{hosting_user_home_hspc}}/reference-authorization"
 
 # Database schema
 auth_server_database: oic
-auth_db_file: "{{install_dir}}/auth_server_db.hsql"
+auth_db_file: "{{hosting_user_home}}/auth_server_db.hsql"
 
 # add these values to support new users
 auth_server_newUserUrl: ""

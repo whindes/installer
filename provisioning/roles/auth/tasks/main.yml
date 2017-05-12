@@ -1,8 +1,8 @@
 ---
 - name: create hspc-reference-auth project home
   tags: [auth-all, auth-code, smart-platform]
-  become_user: "{{username}}"
-  file: path="{{hspc_install_dir}}/{{item}}" state=directory
+  become_user: "{{hosting_username}}"
+  file: path="{{hosting_user_home_hspc}}/{{item}}" state=directory
   with_items:
     - "{{auth_server_project_info.target.name}}"
     - "{{auth_server_project_info.target.name}}/src"
@@ -19,13 +19,13 @@
 
 - name: pom.xml overlay
   tags: [auth-all, auth-code, smart-platform]
-  become_user: "{{username}}"
+  become_user: "{{hosting_username}}"
   template: src=pom.xml.j2
             dest={{auth_server_project_info.target.folder}}/pom.xml
 
 - name: patch auth server login screen
   tags: [auth-all, auth-code, smart-platform]
-  become_user: "{{username}}"
+  become_user: "{{hosting_username}}"
   template: src=login.jsp.j2
             dest={{auth_server_project_info.target.folder}}/src/main/webapp/WEB-INF/views/login.jsp
 
@@ -40,7 +40,7 @@
 
 - name: build hspc auth server
   tags: [auth-all, auth-code, smart-platform]
-  become_user: "{{username}}"
+  become_user: "{{hosting_username}}"
   shell: chdir={{auth_server_project_info.target.folder}}
        mvn clean install -e -U
 

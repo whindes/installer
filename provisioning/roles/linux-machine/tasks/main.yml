@@ -1,6 +1,7 @@
 ---
 - name: installer profile
   tags: [linux-all, smart-platform]
+  become_user: "{{installer_user}}"
   template: src=.bash_profile.j2 dest={{installer_user_home}}/.bash_profile
 
 - name: check custom certificate preconditions
@@ -56,24 +57,24 @@
 
 - name: create group
   tags: [linux-all, smart-platform]
-  group: name="{{username}}"
+  group: name="{{hosting_username}}"
 
 - name: create user
   tags: [linux-all, smart-platform]
-  user: name="{{username}}" password="{{userpass}}" update_password="on_create"
-        group="{{username}}" groups=sudo
+  user: name="{{hosting_username}}" password="{{hosting_userpass}}" update_password="on_create"
+        group="{{hosting_username}}" groups=sudo
         shell=/bin/bash
 
 - name: download jetty-runner
   tags: [linux-all, smart-platform]
-  become_user: "{{username}}"
+  become_user: "{{hosting_username}}"
   get_url:
           url={{jetty_download_url}}
-          dest={{install_dir}}/jetty-runner.jar
+          dest={{hosting_user_home}}/jetty-runner.jar
 
 - name: config jetty-runner
   tags: [linux-all, smart-platform]
-  copy: src=jetty.xml dest={{install_dir}}/jetty.xml
+  copy: src=jetty.xml dest={{hosting_user_home}}/jetty.xml
 
 - name: create ssl certificates directory
   tags: [linux-all, smart-platform]
@@ -111,7 +112,7 @@
            -delete -trustcacerts
            -alias {{certificate_truststore_alias}}
            -file /etc/nginx/ssl/{{certificate_crt_filename}}
-           -keystore {{install_dir}}/keystore
+           -keystore {{hosting_user_home}}/keystore
 
 - name: import server certificate in truststore
   tags: [linux-all, smart-platform]
@@ -120,7 +121,7 @@
            -importcert -trustcacerts
            -alias {{certificate_truststore_alias}}
            -file /etc/nginx/ssl/{{certificate_crt_filename}}
-           -keystore {{install_dir}}/keystore
+           -keystore {{hosting_user_home}}/keystore
 
 - name: add www-data user to ssl-cert group
   tags: [linux-all, smart-platform]
@@ -142,15 +143,15 @@
 
 - name: clear truststore
   tags: [linux-all, smart-platform]
-  file: name={{install_dir}}/keystore state=absent
+  file: name={{hosting_user_home}}/keystore state=absent
 
 - name: initialize truststore
   tags: [linux-all, smart-platform]
-  become_user: "{{username}}"
+  become_user: "{{hosting_username}}"
   when: use_secure_http
   shell: /bin/echo -e "{{keystore_password}}\n{{keystore_password}}\n\n\n\n\n\n\nyes\n" | keytool
            -genkey -alias smart
-           -keystore {{install_dir}}/keystore
+           -keystore {{hosting_user_home}}/keystore
 
 - name: configure nginx (default)
   tags: [linux-all, smart-production]
@@ -172,21 +173,21 @@
   tags: [linux-all, smart-platform]
   mysql_user: name='' host={{mysql_connect_host}} state=absent
 
-- name: ensures {{install_dir}}/scripts dir exists
+- name: ensures {{hosting_user_home}}/scripts dir exists
   tags: [linux-all, smart-production]
-  become_user: "{{username}}"
+  become_user: "{{hosting_username}}"
   file: path={{user_scripts_home}}
         state=directory
 
-- name: ensures {{install_dir}}/jobs dir exists
+- name: ensures {{hosting_user_home}}/jobs dir exists
   tags: [linux-all, smart-production]
-  become_user: "{{username}}"
+  become_user: "{{hosting_username}}"
   file: path={{user_jobs_home}}
         state=directory
 
-- name: ensures {{install_dir}}/jobs output dir exists
+- name: ensures {{hosting_user_home}}/jobs output dir exists
   tags: [linux-all, smart-production]
-  become_user: "{{username}}"
+  become_user: "{{hosting_username}}"
   file: path="{{user_jobs_home}}/output"
         state=directory
 
@@ -196,19 +197,19 @@
 
 - name: Create the AWS config directory
   tags: [linux-all, smart-production]
-  become_user: "{{username}}"
-  file: path={{install_dir}}/.aws
+  become_user: "{{hosting_username}}"
+  file: path={{hosting_user_home}}/.aws
         state=directory
         mode=0755
 
 - name: Copy AWS CLI config
   tags: [linux-all, smart-production]
-  become_user: "{{username}}"
-  template: src=aws_cli_config.j2 dest="{{install_dir}}/.aws/config" mode=0600
+  become_user: "{{hosting_username}}"
+  template: src=aws_cli_config.j2 dest="{{hosting_user_home}}/.aws/config" mode=0600
 
 - name: initialize crontab file SHELL
   tags: [linux-all, smart-production]
-  become_user: "{{username}}"
+  become_user: "{{hosting_username}}"
   cron:
     name: SHELL
     env: yes
@@ -216,7 +217,7 @@
 
 - name: initialize crontab file PATH
   tags: [linux-all, smart-production]
-  become_user: "{{username}}"
+  become_user: "{{hosting_username}}"
   cron:
     name: PATH
     env: yes
@@ -224,28 +225,28 @@
 
 - name: create script aws-snapshot-job.sh
   tags: [linux-all, smart-production]
-  become_user: "{{username}}"
+  become_user: "{{hosting_username}}"
   template: src=aws-snapshot-job.sh.j2
             dest={{user_scripts_home}}/aws-snapshot-job.sh
             mode=0755
 
 - name: create script aws-remove-snapshot.sh
   tags: [linux-all, smart-production]
-  become_user: "{{username}}"
+  become_user: "{{hosting_username}}"
   template: src=aws-remove-snapshot.sh.j2
             dest={{user_scripts_home}}/aws-remove-snapshot.sh
             mode=0755
 
 - name: create script aws-take-snapshot.sh
   tags: [linux-all, smart-production]
-  become_user: "{{username}}"
+  become_user: "{{hosting_username}}"
   template: src=aws-take-snapshot.sh.j2
             dest={{user_scripts_home}}/aws-take-snapshot.sh
             mode=0755
 
 - name: create script aws-describe-snapshots.sh
   tags: [linux-all, smart-production]
-  become_user: "{{username}}"
+  become_user: "{{hosting_username}}"
   template: src=aws-describe-snapshots.sh.j2
             dest={{user_scripts_home}}/aws-describe-snapshots.sh
             mode=0755
@@ -254,7 +255,7 @@
 - name: create cron job to snapshot to AWS
   tags: [api-dstu2-all, api-dstu2-sandbox, api-dstu2-cron, smart-production]
   when: enable_aws_snapshot
-  become_user: "{{username}}"
+  become_user: "{{hosting_username}}"
   cron:
     name: "server snapshot"
     minute: "0"

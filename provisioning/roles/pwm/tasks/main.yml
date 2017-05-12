@@ -1,10 +1,10 @@
 ---
 - name: checkout repository pwm_project
   tags: [pwm-all, pwm-code, smart-production]
-  become_user: "{{username}}"
+  become_user: "{{hosting_username}}"
   git: repo="{{hspc_repo_base}}/{{pwm_project}}"
        version="{{pwm_branch}}"
-       dest="{{hspc_install_dir}}/{{pwm_project}}"
+       dest="{{hosting_user_home_hspc}}/{{pwm_project}}"
        update={{update_repositories}}
        force=yes
        depth=1
@@ -12,28 +12,28 @@
 # install SMART logos
 - name: config company-logo.png
   tags: [pwm-all, pwm-code, smart-production]
-  copy: src=roles/common/files/images/company-logo.png dest="{{hspc_install_dir}}/{{pwm_project}}/src/main/webapp/public/resources/themes/custom/company-logo.png"
+  copy: src=roles/common/files/images/company-logo.png dest="{{hosting_user_home_hspc}}/{{pwm_project}}/src/main/webapp/public/resources/themes/custom/company-logo.png"
 
 # install SMART logos
 - name: config company-logo.png
   tags: [pwm-all, pwm-code, smart-production]
-  copy: src=roles/common/files/images/company-logo@2x.png dest="{{hspc_install_dir}}/{{pwm_project}}/src/main/webapp/public/resources/themes/custom/company-logo@2x.png"
+  copy: src=roles/common/files/images/company-logo@2x.png dest="{{hosting_user_home_hspc}}/{{pwm_project}}/src/main/webapp/public/resources/themes/custom/company-logo@2x.png"
 
 # install SMART logos
 - name: config company-logo.png
   tags: [pwm-all, pwm-code, smart-production]
-  copy: src=roles/common/files/images/company-logo-main-web-top.png dest="{{hspc_install_dir}}/{{pwm_project}}/src/main/webapp/public/resources/themes/custom/company-logo-main-web-top.png"
+  copy: src=roles/common/files/images/company-logo-main-web-top.png dest="{{hosting_user_home_hspc}}/{{pwm_project}}/src/main/webapp/public/resources/themes/custom/company-logo-main-web-top.png"
 
 - name: patch PwmConfiguration.xml
   tags: [pwm-all, pwm-code, smart-production]
-  become_user: "{{username}}"
+  become_user: "{{hosting_username}}"
   template: src=PwmConfiguration.xml.j2
-            dest="{{hspc_install_dir}}/{{pwm_project}}/src/main/webapp/WEB-INF/PwmConfiguration.xml"
+            dest="{{hosting_user_home_hspc}}/{{pwm_project}}/src/main/webapp/WEB-INF/PwmConfiguration.xml"
 
 - name: build hspc pwm server
   tags: [pwm-all, pwm-code, smart-production]
-  become_user: "{{username}}"
-  shell: chdir={{hspc_install_dir}}
+  become_user: "{{hosting_username}}"
+  shell: chdir={{hosting_user_home_hspc}}
        mvn clean install -e -U -f {{pwm_project}}/pom.xml
 
 - name: Configure MySQL user
@@ -50,31 +50,31 @@
 
 - name: install apache-tomcat
   tags: [pwm-all, pwm-server, smart-production]
-  become_user: "{{username}}"
+  become_user: "{{hosting_username}}"
   unarchive: src="{{tomcat_artifact_url}}"
-             dest="{{install_dir}}"
+             dest="{{hosting_user_home}}"
              creates="{{tomcat_home}}"
 
 - name: configure tomcat server
   tags: [pwm-all, pwm-server, smart-production]
-  become_user: "{{username}}"
+  become_user: "{{hosting_username}}"
   template: src=server.xml.j2
             dest="{{tomcat_home}}/conf/server.xml"
 
 - name: remove tomcat default webapps
   tags: [pwm-all, pwm-server, smart-production]
-  become_user: "{{username}}"
+  become_user: "{{hosting_username}}"
   file: path="{{tomcat_home}}/webapps" state=absent
 
 - name: initialize tomcat webapps
   tags: [pwm-all, pwm-server, smart-production]
-  become_user: "{{username}}"
+  become_user: "{{hosting_username}}"
   file: path="{{tomcat_home}}/webapps" state=directory
 
 - name: configure tomcat to only host pwm
   tags: [pwm-all, pwm-server, smart-production]
-  become_user: "{{username}}"
-  shell: "cp -r {{hspc_install_dir}}/pwm/target/pwm-1.7 {{tomcat_home}}/webapps/ROOT"
+  become_user: "{{hosting_username}}"
+  shell: "cp -r {{hosting_user_home_hspc}}/pwm/target/pwm-1.7 {{tomcat_home}}/webapps/ROOT"
 
 - name: configure pwm server service
   tags: [pwm-all, pwm-server, smart-production]

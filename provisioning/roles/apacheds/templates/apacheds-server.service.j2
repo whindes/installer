@@ -11,8 +11,8 @@ Environment='JAVA_OPTS=-Xms256m -Xmx512m -XX:MaxPermSize=256m -Djava.awt.headles
 ExecStart={{apacheds_home}}/bin/apacheds.sh start
 ExecStop={{apacheds_home}}/bin/apacheds.sh stop
 
-User={{username}}
-Group={{username}}
+User={{hosting_username}}
+Group={{hosting_username}}
 UMask=0007
 RestartSec=10
 Restart=always

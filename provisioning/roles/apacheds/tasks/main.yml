@@ -11,22 +11,22 @@
 # for raw apacheds
 #- name: download apacheds
 #  tags: [apacheds-all, apacheds-server, smart-platform]
-#  become_user: "{{username}}"
-#  get_url: url={{apacheds_artifact_url}} dest={{install_dir}}
+#  become_user: "{{hosting_username}}"
+#  get_url: url={{apacheds_artifact_url}} dest={{hosting_user_home}}
 #
 #- name: extract apacheds
 #  tags: [apacheds-all, apacheds-server, smart-platform]
-#  become_user: "{{username}}"
-#  unarchive: src="{{install_dir}}/{{apacheds_artifact_name}}" dest="{{install_dir}}" copy=no
+#  become_user: "{{hosting_username}}"
+#  unarchive: src="{{hosting_user_home}}/{{apacheds_artifact_name}}" dest="{{hosting_user_home}}" copy=no
 #
 #- name: setenv.sh properties
 #  tags: [apacheds-all, apacheds-server, smart-platform]
-#  template: src=setenv.sh.j2 dest="{{apacheds_home}}/bin/setenv.sh" owner="{{username}}" group="{{username}}" mode=0744
+#  template: src=setenv.sh.j2 dest="{{apacheds_home}}/bin/setenv.sh" owner="{{hosting_username}}" group="{{hosting_username}}" mode=0744
 #
 - name: extract configured apacheds
   tags: [apacheds-all, apacheds-code, smart-platform]
-  become_user: "{{username}}"
-  unarchive: src="apacheds-2.0.0-M23-configured.tar" dest="{{install_dir}}"
+  become_user: "{{hosting_username}}"
+  unarchive: src="apacheds-2.0.0-M23-configured.tar" dest="{{hosting_user_home}}"
 
 - name: configure apacheds-server service
   tags: [apacheds-all, apacheds-server, smart-platform]
@@ -58,13 +58,13 @@
 
 - name: generate sandbox admin update script
   tags: [apacheds-all, apacheds-sandbox, smart-platform]
-  become_user: "{{username}}"
+  become_user: "{{hosting_username}}"
   template: src="update-sandbox-admin-password.ldif.j2"
             dest="{{apacheds_home}}/update-sandbox-admin-password.ldif"
 
 - name: update sandbox admin
   tags: [apacheds-all, apacheds-sandbox, smart-platform]
-  become_user: "{{username}}"
+  become_user: "{{hosting_username}}"
   shell: chdir={{apacheds_home}}
          ldapadd
            -h {{apacheds_server_host}}
@@ -76,13 +76,13 @@
 
 - name: generate sandbox demo update script
   tags: [apacheds-all, apacheds-sandbox, smart-platform]
-  become_user: "{{username}}"
+  become_user: "{{hosting_username}}"
   template: src="update-sandbox-demo-password.ldif.j2"
             dest="{{apacheds_home}}/update-sandbox-demo-password.ldif"
 
 - name: update sandbox demo
   tags: [apacheds-all, apacheds-sandbox, smart-platform]
-  become_user: "{{username}}"
+  become_user: "{{hosting_username}}"
   shell: chdir={{apacheds_home}}
          ldapadd
            -h {{apacheds_server_host}}

@@ -5,7 +5,7 @@ SAMPLE_DATA_CONTINUE_ON_ERROR=${CONTINUE_ON_ERROR:-false}
 SAMPLE_DATA_CONTINUE_ON_RESOURCE_ERROR=true
 SAMPLE_DATA_WORKING_FOLDER="${JOBS_FOLDER:-{{user_jobs_home}}}"
 SAMPLE_DATA_OUTPUT_FOLDER="${OUTPUT_FOLDER:-{{user_jobs_output_home}}/$(date '+%Y-%m-%d')}"
-SAMPLE_DATA_RESOURCES_FOLDER="{{install_dir}}/api-dstu2-custom-sample-data/fhir-resources"
+SAMPLE_DATA_RESOURCES_FOLDER="{{hosting_user_home}}/api-dstu2-custom-sample-data/fhir-resources"
 
 function SAMPLE_DATA_handleLastError {
   echo $1
@@ -83,7 +83,7 @@ do
     203|204|205|206|207|208|226) echo "$HTTP_STATUS"
          ;;
     *) echo "$HTTP_STATUS"
-       handleResourceError "Failed to import custom-sample-data at $RESOURCES_FOLDER/$FILE"
+       handleResourceError "Failed to import custom-sample-data at $SAMPLE_DATA_RESOURCES_FOLDER/$FILE"
        ;;
     esac
 done
