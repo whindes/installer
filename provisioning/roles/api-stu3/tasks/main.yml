@@ -72,7 +72,7 @@
   include: roles/common/tasks/snapshot-command.yml
   tags: [smart-production]
   vars:
-    sandbox_url: "{{api_stu3_server_url}}"
+    sandbox_url: "{{api_stu3_server_default_sandbox_url}}"
     snapshot_name: "{{api_stu3_baseline_snapshot}}"
     snapshot_action: Delete
 
