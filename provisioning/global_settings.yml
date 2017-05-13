@@ -358,6 +358,12 @@ installer_user: "vagrant"
 installer_user_home: "/home/{{installer_user}}"
 installer_home: "{{installer_user_home}}/installer"
 
+# Setting this to true will enable PWM
+enable_pwm: false
+
+# Setting this to true will enable nightly reset
+enable_nightly_reset: false
+
 user_scripts_home: "{{hosting_user_home}}/scripts"
 user_jobs_home: "{{hosting_user_home}}/jobs"
 user_jobs_output_home: "{{user_jobs_home}}/output"
