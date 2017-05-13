@@ -42,7 +42,7 @@ java_home: "/usr/lib/jvm/java-8-openjdk-amd64/jre"
 jetty_download_url: "http://central.maven.org/maven2/org/eclipse/jetty/jetty-runner/9.3.6.v20151106/jetty-runner-9.3.6.v20151106.jar"
 
 # Database configuration
-mysql_host: "{{services_host}}"
+mysql_host: "localhost"
 mysql_connect_host: "%"
 mysql_endpoint: "{{mysql_host}}:3306"
 mysql_root_pass: "password"
