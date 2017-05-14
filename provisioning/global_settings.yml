@@ -252,6 +252,8 @@ api_stu3_server_inferred_port: "{{(':'+api_stu3_server_external_port|string) if 
 api_stu3_server_url: "http://{{api_stu3_server_host}}{{api_stu3_server_inferred_port}}"
 api_stu3_server_default_sandbox_url: "{{api_stu3_server_url}}/{{api_stu3_server_sandbox}}"
 api_stu3_server_default_sandbox_fhir_root_url: "{{api_stu3_server_default_sandbox_url}}/data"
+# not working to post to the external address so post to the internal for now
+api_stu3_server_local_default_sandbox_url: "http://localhost:{{api_stu3_server_port}}/{{api_stu3_server_sandbox}}"
 api_stu3_server_initial_memory: 256M
 api_stu3_server_max_memory: 512M
 api_stu3_server_artifact_group_id: "org.hspconsortium.reference"

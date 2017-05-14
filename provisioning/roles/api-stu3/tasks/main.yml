@@ -61,7 +61,7 @@
   include: roles/common/tasks/snapshot-command.yml
   when: enable_nightly_reset
   vars:
-    sandbox_url: "{{api_stu3_server_default_sandbox_url}}"
+    sandbox_url: "{{api_stu3_server_local_default_sandbox_url}}"
     snapshot_name: "{{api_stu3_baseline_snapshot}}"
     snapshot_action: Delete
 
@@ -120,7 +120,7 @@
   include: roles/common/tasks/snapshot-command.yml
   when: enable_nightly_reset
   vars:
-    sandbox_url: "{{api_stu3_server_default_sandbox_url}}"
+    sandbox_url: "{{api_stu3_server_local_default_sandbox_url}}"
     snapshot_name: "{{api_stu3_baseline_snapshot}}"
     snapshot_action: Take
 
