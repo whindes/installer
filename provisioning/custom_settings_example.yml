@@ -53,7 +53,7 @@ auth_server_password: "secret"
 auth_server_newUserUrl: ""
 
 persona_auth_server_host: "{{services_host}}"
-persona_auth_server_port: "9161"
+persona_auth_server_port: "9160"
 persona_auth_server_newUserUrl: ""
 
 messaging_server_host: "{{services_host}}"

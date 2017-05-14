@@ -254,8 +254,8 @@ api_stu3_server_default_sandbox_url: "{{api_stu3_server_url}}/{{api_stu3_server_
 api_stu3_server_default_sandbox_fhir_root_url: "{{api_stu3_server_default_sandbox_url}}/data"
 # not working to post to the external address so post to the internal for now
 api_stu3_server_local_default_sandbox_url: "http://localhost:{{api_stu3_server_port}}/{{api_stu3_server_sandbox}}"
-api_stu3_server_initial_memory: 256M
-api_stu3_server_max_memory: 512M
+api_stu3_server_initial_memory: 128M
+api_stu3_server_max_memory: 256M
 api_stu3_server_artifact_group_id: "org.hspconsortium.reference"
 api_stu3_server_artifact_artifact_id: "hspc-reference-api-webapp-multitenant"
 api_stu3_server_artifact_version: "1.5.2-SNAPSHOT"
@@ -328,7 +328,7 @@ auth_server_enable_mock_endpoints: true
 
 # Persona-Auth Server
 persona_auth_server_host: "{{services_host}}"
-persona_auth_server_port: "9161"
+persona_auth_server_port: "9160"
 persona_auth_server_internal_host: "localhost"
 persona_auth_server_internal_port: "8160"
 persona_auth_server_context: "/"

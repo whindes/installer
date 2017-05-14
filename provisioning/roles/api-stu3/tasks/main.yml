@@ -61,7 +61,14 @@
   become_user: "{{hosting_username}}"
   when: enable_nightly_reset
   uri:
-    url: "{{api_stu3_server_local_default_sandbox_url}}/sandbox"
+    url: "http://localhost:8071/smartdstu2/sandbox"
+    method: GET
+
+- name: Query sandbox snapshot
+  become_user: "{{hosting_username}}"
+  when: enable_nightly_reset
+  uri:
+    url: "http://localhost:8074/smartstu3/sandbox"
     method: GET
 
 - name: Delete sandbox snapshot
