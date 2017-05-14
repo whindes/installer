@@ -246,6 +246,7 @@ api_stu3_baseline_snapshot: initial
 
 # API_STU3 Server
 api_stu3_server_host: "{{services_host}}"
+api_stu3_server_internal_host: "localhost"
 api_stu3_server_external_port: "9074"
 api_stu3_server_port: "8074"
 api_stu3_server_inferred_port: "{{(':'+api_stu3_server_external_port|string) if api_stu3_server_external_port|int not in (80,443) else ''}}"
@@ -253,7 +254,7 @@ api_stu3_server_url: "http://{{api_stu3_server_host}}{{api_stu3_server_inferred_
 api_stu3_server_default_sandbox_url: "{{api_stu3_server_url}}/{{api_stu3_server_sandbox}}"
 api_stu3_server_default_sandbox_fhir_root_url: "{{api_stu3_server_default_sandbox_url}}/data"
 # not working to post to the external address so post to the internal for now
-api_stu3_server_local_default_sandbox_url: "http://localhost:{{api_stu3_server_port}}/{{api_stu3_server_sandbox}}"
+api_stu3_server_local_default_sandbox_url: "http://{{api_stu3_server_internal_host}}:{{api_stu3_server_port}}/{{api_stu3_server_sandbox}}"
 api_stu3_server_initial_memory: 128M
 api_stu3_server_max_memory: 256M
 api_stu3_server_artifact_group_id: "org.hspconsortium.reference"
@@ -266,8 +267,19 @@ api_stu3_server_artifact_location: "{{m2_repo_folder}}/org/hspconsortium/referen
 api_default_server_url: "{{api_stu3_server_url}}"
 api_default_sandbox_url: "{{api_stu3_server_url}}/{{api_stu3_server_sandbox}}/data"
 
+# PERSONA_API_STU3 Server
+persona_api_stu3_server_host: "{{services_host}}"
+persona_api_stu3_server_internal_host: "localhost"
+persona_api_stu3_server_external_port: "9174"
+persona_api_stu3_server_port: "8174"
+persona_api_stu3_server_inferred_port: "{{(':'+persona_api_stu3_server_external_port|string) if persona_api_stu3_server_external_port|int not in (80,443) else ''}}"
+persona_api_stu3_server_url: "http://{{persona_api_stu3_server_host}}{{persona_api_stu3_server_inferred_port}}"
+persona_api_stu3_server_default_sandbox_url: "{{persona_api_stu3_server_url}}/{{api_stu3_server_sandbox}}"
+persona_api_stu3_server_default_sandbox_fhir_root_url: "{{persona_api_stu3_server_default_sandbox_url}}/data"
+
 # MOCK_API_STU3 Server
 mock_api_stu3_server_host: "{{services_host}}"
+mock_api_stu3_server_internal_host: "localhost"
 mock_api_stu3_server_port: "8274"
 mock_api_stu3_server_security_mode: mock
 mock_api_stu3_server_external_port: "9274"
@@ -275,15 +287,6 @@ mock_api_stu3_server_inferred_port: "{{(':'+mock_api_stu3_server_external_port|s
 mock_api_stu3_server_url: "http://{{mock_api_stu3_server_host}}{{mock_api_stu3_server_inferred_port}}"
 mock_api_stu3_server_default_sandbox_url: "{{mock_api_stu3_server_url}}/{{api_stu3_server_sandbox}}"
 mock_api_stu3_server_default_sandbox_fhir_root_url: "{{mock_api_stu3_server_default_sandbox_url}}/data"
-
-# PERSONA_API_STU3 Server
-persona_api_stu3_server_host: "{{services_host}}"
-persona_api_stu3_server_external_port: "9174"
-persona_api_stu3_server_port: "8174"
-persona_api_stu3_server_inferred_port: "{{(':'+persona_api_stu3_server_external_port|string) if persona_api_stu3_server_external_port|int not in (80,443) else ''}}"
-persona_api_stu3_server_url: "http://{{persona_api_stu3_server_host}}{{persona_api_stu3_server_inferred_port}}"
-persona_api_stu3_server_default_sandbox_url: "{{persona_api_stu3_server_url}}/{{api_stu3_server_sandbox}}"
-persona_api_stu3_server_default_sandbox_fhir_root_url: "{{persona_api_stu3_server_default_sandbox_url}}/data"
 
 # Messaging Server
 messaging_server_host: "{{services_host}}"

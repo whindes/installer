@@ -52,7 +52,7 @@
 
 - name: "verify api_stu3 is available"
   become_user: "{{hosting_username}}"
-  wait_for: host={{api_stu3_server_host}} port={{api_stu3_server_external_port}}
+  wait_for: host={{api_stu3_server_internal_host}} port={{api_stu3_server_port}}
 
 - meta: flush_handlers
 
@@ -218,7 +218,7 @@
 
 - name: "verify persona_api_stu3 is available"
   become_user: "{{hosting_username}}"
-  wait_for: host={{persona_api_stu3_server_host}} port={{persona_api_stu3_server_external_port}}
+  wait_for: host={{persona_api_stu3_server_internal_host}} port={{persona_api_stu3_server_port}}
 
 - meta: flush_handlers
 
@@ -261,7 +261,7 @@
 
 - name: "verify mock_api_stu3 is available"
   become_user: "{{hosting_username}}"
-  wait_for: host={{mock_api_stu3_server_host}} port={{mock_api_stu3_server_external_port}}
+  wait_for: host={{mock_api_stu3_server_internal_host}} port={{mock_api_stu3_server_port}}
 
 - meta: flush_handlers
 
