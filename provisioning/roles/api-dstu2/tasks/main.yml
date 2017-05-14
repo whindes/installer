@@ -153,11 +153,11 @@
             mode=0755
 
 # SMART production only
-- name: create script reset-database-job.sh
+- name: create script reset-database-job-dstu2.sh
   when: enable_nightly_reset
   become_user: "{{hosting_username}}"
-  template: src=reset-database-job.sh.j2
-            dest={{user_scripts_home}}/reset-database-job.sh
+  template: src=reset-database-job-dstu2.sh.j2
+            dest={{user_scripts_home}}/reset-database-job-dstu2.sh
             mode=0755
 
 # SMART production only
@@ -169,7 +169,7 @@
     name: "reset api-dstu2 database"
     minute: "0"
     hour: "5"
-    job: "{{user_scripts_home}}/reset-database-job.sh >> {{user_jobs_output_home}}/nightly-reset.log"
+    job: "{{user_scripts_home}}/reset-database-job-dstu2.sh >> {{user_jobs_output_home}}/nightly-reset.log"
 
 # Persona server
 - name: configure persona-api-dstu2-server service

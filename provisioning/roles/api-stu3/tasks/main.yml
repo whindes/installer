@@ -21,6 +21,11 @@
     dest: "{{hosting_user_home}}/api_stu3"
     remote_src: True
 
+- name: "drop the api_stu3 snapshot database"
+  mysql_db:
+    name: "{{api_stu3_server_database}}${{api_stu3_baseline_snapshot}}"
+    state: absent
+
 - name: "drop the api_stu3 database"
   mysql_db: name={{api_stu3_server_database}} state=absent
 
@@ -63,16 +68,15 @@
   vars:
     sandbox_url: "{{api_stu3_server_local_default_sandbox_url}}"
     snapshot_name: "{{api_stu3_baseline_snapshot}}"
-    snapshot_action: Delete
+    snapshot_action: "Delete"
 
 - name: take baseline snapshot
-  become_user: "{{hosting_username}}"
   when: enable_nightly_reset
   include: roles/common/tasks/snapshot-command.yml
   vars:
     sandbox_url: "{{api_stu3_server_local_default_sandbox_url}}"
     snapshot_name: "{{api_stu3_baseline_snapshot}}"
-    snapshot_action: Take
+    snapshot_action: "Take"
 
 - name: "create script restore-baseline-snapshot-stu3.sh"
   when: enable_nightly_reset
@@ -81,7 +85,7 @@
             dest={{user_scripts_home}}/restore-baseline-snapshot-stu3.sh
             mode=0755
 
-- name: "create script reset-database-job.sh"
+- name: "create script reset-database-job-stu3.sh"
   when: enable_nightly_reset
   become_user: "{{hosting_username}}"
   template: src=reset-database-job-stu3.sh.j2
