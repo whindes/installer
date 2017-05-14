@@ -57,12 +57,13 @@
 - meta: flush_handlers
 
 # SMART production only
-- name: Take sandbox snapshot
+- name: Delete sandbox snapshot
+  become_user: "{{hosting_username}}"
   when: enable_nightly_reset
   uri:
     url: "{{api_stu3_server_local_default_sandbox_url}}/sandbox/snapshot/{{api_stu3_baseline_snapshot}}"
     method: POST
-    body: '{"action": "Take"}'
+    body: '{"action": "Delete"}'
     body_format: json
     HEADER_Content-Type: "application/json"
 
@@ -118,6 +119,7 @@
 
 # SMART production only
 - name: take baseline snapshot
+  become_user: "{{hosting_username}}"
   when: enable_nightly_reset
   include: roles/common/tasks/snapshot-command.yml
   vars:
