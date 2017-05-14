@@ -264,6 +264,3 @@
   wait_for: host={{mock_api_stu3_server_internal_host}} port={{mock_api_stu3_server_port}}
 
 - meta: flush_handlers
-
-
-
