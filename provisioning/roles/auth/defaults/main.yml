@@ -6,9 +6,9 @@ auth_server_max_memory: 256M
 auth_server_webapp_info:
   group_id: "org.hspconsortium.reference"
   artifact_id: "hspc-reference-auth-server-ldap-webapp"
-  version: "1.1"
+  version: "1.2.1-SNAPSHOT"
   packaging: "war"
-  war_location: "{{hosting_user_home_hspc}}/org/hspconsortium/reference/hspc-reference-auth-server-ldap-webapp/1.1"
+  war_location: "{{hosting_user_home_hspc}}/org/hspconsortium/reference/hspc-reference-auth-server-ldap-webapp/1.2.1-SNAPSHOT"
 
 # Projects
 auth_server_project_info:
