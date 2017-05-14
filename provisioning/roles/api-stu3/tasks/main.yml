@@ -57,6 +57,13 @@
 - meta: flush_handlers
 
 # SMART production only
+- name: Query sandbox snapshot
+  become_user: "{{hosting_username}}"
+  when: enable_nightly_reset
+  uri:
+    url: "{{api_stu3_server_local_default_sandbox_url}}/sandbox"
+    method: GET
+
 - name: Delete sandbox snapshot
   become_user: "{{hosting_username}}"
   when: enable_nightly_reset
