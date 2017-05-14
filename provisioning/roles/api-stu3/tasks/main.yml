@@ -57,13 +57,14 @@
 - meta: flush_handlers
 
 # SMART production only
-- name: drop sandbox snapshot
+- name: Take sandbox snapshot
   when: enable_nightly_reset
-  include: roles/common/tasks/snapshot-command.yml
-  vars:
-    sandbox_url: "{{api_stu3_server_local_default_sandbox_url}}"
-    snapshot_name: "{{api_stu3_baseline_snapshot}}"
-    snapshot_action: Delete
+  uri:
+    url: "{{api_stu3_server_local_default_sandbox_url}}/sandbox/snapshot/{{api_stu3_baseline_snapshot}}"
+    method: POST
+    body: '{"action": "Take"}'
+    body_format: json
+    HEADER_Content-Type: "application/json"
 
 # load the starter data
 #- name: "initialize sandbox at {{api_stu3_server_default_sandbox_url}}/sandbox"
