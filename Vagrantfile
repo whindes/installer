@@ -21,6 +21,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.network :forwarded_port, guest: 9072, host: 9072
 # Persona-API_STU3 Server
   config.vm.network :forwarded_port, guest: 9073, host: 9073
+# Mock-API_STU3 Server
+  config.vm.network :forwarded_port, guest: 9075, host: 9075
 
 # Auth Server
   config.vm.network :forwarded_port, guest: 9080, host: 9080
@@ -53,7 +55,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   config.vm.provision "ansible" do |ansible|
 #    ansible.verbose="vvvv"
-#    ansible.tags=["api-dstu2-all"]
+    ansible.tags=["smart-platform"]
     ansible.playbook = "provisioning/site.yml"
   end
 
