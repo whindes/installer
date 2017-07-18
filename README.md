@@ -25,6 +25,8 @@ When complete, you will have a SMART on FHIR platform!
 * `{host}:9080/` for the Sandbox Manager application
 * `{host}:9071/api/smartdstu2/data` for a FHIR DSTU2 API server
 * `{host}:9071/api/smartdstu2/data/metadata` for the FHIR DSTU2 API conformance
+* `{host}:9074/api/smartstu3/data` for a FHIR STU3 API server
+* `{host}:9074/api/smartstu3/data/metadata` for the FHIR STU3 API conformance
 * `{host}:9060/auth/` for an OAuth2 authorization server
 * `{host}:9093` for a SMART apps server
 * `{host}:10389` for an ApacheDS LDAP server
@@ -129,7 +131,7 @@ Please contact each of these open-source projects with further questions.
 
 | Functional Role            | System Name              | More Information                                                     |
 | -------------------------- | ------------------------ | -------------------------------------------------------------------- |
-| DSTU2 FHIR Server          | HSPC Reference API       | https://bitbucket.org/hspconsortium/reference-api                    |
+| DSTU2 & STU3 FHIR Server   | HSPC Reference API       | https://bitbucket.org/hspconsortium/reference-api                    |
 |                            | HAPI FHIR                | http://jamesagnew.github.io/hapi-fhir/                               |
 | OAuth2 Server              | HSPC Reference Auth      | https://bitbucket.org/hspconsortium/reference-auth                   |
 |                            | MITRE Open ID Connect    | https://github.com/mitreid-connect/OpenID-Connect-Java-Spring-Server |
@@ -184,6 +186,7 @@ By default, the server will load data for only 20 sample patients. To automatica
 The installer creates servers that log to the journal.  You can view the journal logs using this command:
 
 * sudo journalctl -u api-dstu2-server.service
+* sudo journalctl -u api-stu3-server.service
 * sudo journalctl -u auth-server.service
 
 Use the -f option tail the logs.
@@ -215,16 +218,12 @@ alias stopn='sudo service nginx stop'
 These aliases are helpful for viewing (ex: v...) or tailing (ex: t...) different service logs.
 ```
 alias tapi='sudo journalctl -f -u api-dstu2-server.service'
-alias tapip='sudo journalctl -f -u persona-api-dstu2-server.service'
+alias tapi='sudo journalctl -f -u api-stu-server.service'
 alias tauth='sudo journalctl -f -u auth-server.service'
-alias tauthp='sudo journalctl -f -u persona-auth-server.service'
 alias tmsg='sudo journalctl -f -u messaging-server.service'
 alias tpwm='sudo journalctl -f -u pwm-server.service'
 alias tsand='sudo journalctl -f -u sandbox-manager-server.service'
-alias vapi='sudo journalctl -u api-dstu2-server.service'
-alias vapip='sudo journalctl -u persona-api-dstu2-server.service'
 alias vauth='sudo journalctl -u auth-server.service'
-alias vauthp='sudo journalctl -u persona-auth-server.service'
 alias vmsg='sudo journalctl -u messaging-server.service'
 alias vpwm='sudo journalctl -u pwm-server.service'
 alias vsand='sudo journalctl -u sandbox-manager-server.service'
