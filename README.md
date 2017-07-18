@@ -30,8 +30,7 @@ When complete, you will have a SMART on FHIR platform!
 * `{host}:10389` for an ApacheDS LDAP server
 * `{host}:3306` for a MySQL database
 
-The two sample accounts are `demo/demo` and `admin/password`.
-You can connect to the LDAP server on `localhost:10389`.
+A demo account is created to simulate a practitioner login: `demo/demo`.
 
 * *See [SMART on FHIR Platform Systems](#platformsystems)*
 
@@ -256,7 +255,6 @@ alias tapi='sudo journalctl -f -u api-dstu2-server.service'
 alias tapip='sudo journalctl -f -u persona-api-dstu2-server.service'
 alias tauth='sudo journalctl -f -u auth-server.service'
 alias tauthp='sudo journalctl -f -u persona-auth-server.service'
-alias tldap='sudo journalctl -f -u apacheds-server.service'
 alias tmsg='sudo journalctl -f -u messaging-server.service'
 alias tpwm='sudo journalctl -f -u pwm-server.service'
 alias tsand='sudo journalctl -f -u sandbox-manager-server.service'
@@ -264,7 +262,6 @@ alias vapi='sudo journalctl -u api-dstu2-server.service'
 alias vapip='sudo journalctl -u persona-api-dstu2-server.service'
 alias vauth='sudo journalctl -u auth-server.service'
 alias vauthp='sudo journalctl -u persona-auth-server.service'
-alias vldap='sudo journalctl -u apacheds-server.service'
 alias vmsg='sudo journalctl -u messaging-server.service'
 alias vpwm='sudo journalctl -u pwm-server.service'
 alias vsand='sudo journalctl -u sandbox-manager-server.service'
