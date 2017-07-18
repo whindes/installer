@@ -92,6 +92,7 @@ In this install, we are going to build a SMART on FHIR platform directly on an U
 
 ### Prerequisites
 * Ubuntu 16.04 machine
+* *See [SMART on FHIR AWS Test Configuration](#awsconfig)*
 
 ### Prepare the server
 From the Ubuntu 16.04 machine:
@@ -144,7 +145,7 @@ Please contact each of these open-source projects with further questions.
 
 ## Tips and Tricks
 
-### AWS Test Configuration
+### <a name="awsconfig"/>AWS Test Configuration
 
 Here is the exact configuration we use to test the installer using an AWS EC2 instance.  The ports must all be open for inbound connections in the security group.
 
