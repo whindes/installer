@@ -103,9 +103,8 @@ git clone https://github.com/smart-on-fhir/installer
 cd installer/provisioning
 ```
 
-Modify the inventory and group_vars for your environment:
+Modify the group_vars for your environment:
 ```
-vi inventory/hosts
 vi inventory/group_vars/all.yml
 ```
 
@@ -158,43 +157,6 @@ Here is the exact configuration we use to test the installer using an AWS EC2 in
 | HTTPS PORT    | 443                     |
 | LDAP PORT     | 10389                   |
 | APPS PORTS    | 9070-9099               |
-
-Here is the inventory.yml file:
-```
-installer_user: "ubuntu"
-services_host: "x.x.x.x" (your IP address)
-sample_patients_branch: "hapi-patients-testing"
-apps_server_external_host: "{{services_host}}"
-api_dstu2_server_host: "{{services_host}}"
-persona_api_dstu2_server_host: "{{services_host}}"
-sandman_server_external_host: "{{services_host}}"
-auth_server_host: "{{services_host}}"
-persona_auth_server_host: "{{services_host}}"
-messaging_server_host: "{{services_host}}"
-```
-
-Here are the commands we run:
-```
-sudo apt-get update
-sudo apt-get -y install curl git python-pycurl python-pip python-yaml python-paramiko python-jinja2
-sudo pip install ansible==2.1.0
-git clone https://github.com/smart-on-fhir/installer
-cd installer/provisioning
-vi inventory.yml
-... (see above)
-sudo ansible-playbook -c local -i 'inventory.yml,' -vvvv site.yml
-...
-(about 20 minutes later...)
-PLAY RECAP *********************************************************************
-localhost                  : ok=216  changed=167  unreachable=0    failed=0
-
-ubuntu:~/installer/provisioning$
-```
-
-Then launch the Sandbox Manager app at:
-```
-http://(your IP address):9080/
-```
 
 ### TLS
 
