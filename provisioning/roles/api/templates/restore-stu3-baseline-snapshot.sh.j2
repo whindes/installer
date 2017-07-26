@@ -5,7 +5,7 @@ RESTORE_BASELINE_CONTINUE_ON_ERROR=${CONTINUE_ON_ERROR:-false}
 RESTORE_BASELINE_WORKING_FOLDER="${JOBS_FOLDER:-{{hosting_user_jobs_home}}}"
 RESTORE_BASELINE_OUTPUT_FOLDER="${OUTPUT_FOLDER:-{{hosting_user_jobs_output_home}}/$(date '+%Y-%m-%d')}"
 
-RESTORE_BASELINE_FILE=restore-dstu2-baseline-snapshot-response.json
+RESTORE_BASELINE_FILE=restore-stu3-baseline-snapshot-response.json
 
 function RESTORE_BASELINE_handleLastError {
   echo $1
@@ -16,7 +16,7 @@ function RESTORE_BASELINE_handleLastError {
 }
 
 # restore the baseline
-HTTP_RESPONSE=$(curl '{{api_dstu2_server_external_url}}/{{api_dstu2_server_sandbox}}/sandbox/snapshot/{{api_baseline_snapshot}}' --silent --write-out 'HTTPSTATUS:%{http_code}' -H 'Content-Type: application/json' --data '{"action": "Restore"}')
+HTTP_RESPONSE=$(curl '{{api_stu3_server_external_url}}/{{api_stu3_server_sandbox}}/sandbox/snapshot/{{api_baseline_snapshot}}' --silent --write-out 'HTTPSTATUS:%{http_code}' -H 'Content-Type: application/json' --data '{"action": "Restore"}')
 
 # handle curl errors
 if [ $? -ne 0 ]

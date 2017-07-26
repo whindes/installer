@@ -71,4 +71,6 @@
 
 - include: "data.yml"
 
-- include: "backup_restore_jobs.yml"
+- include: "backup_restore_job_dstu2.yml"
+
+- include: "backup_restore_job_stu3.yml"

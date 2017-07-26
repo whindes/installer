@@ -47,13 +47,13 @@
     - "aws-take-snapshot.sh"
     - "aws-describe-snapshots.sh"
 
-# create a cron job for nightly reset to be run at 6 AM UTC, or 1 AM US-EST
+# create a cron job for nightly reset to be run at 7 AM UTC, or 2 AM US-EST
 - name: "create cron job to snapshot to AWS"
   when: enable_backup_restore_jobs and enable_aws_snapshot
   become_user: "{{hosting_username}}"
   cron:
     name: "server snapshot"
     minute: "0"
-    hour: "6"
+    hour: "7"
     job: "{{hosting_user_home}}/scripts/aws-snapshot-job.sh >> {{hosting_user_home}}/jobs/output/server-snapshot.log"
 
