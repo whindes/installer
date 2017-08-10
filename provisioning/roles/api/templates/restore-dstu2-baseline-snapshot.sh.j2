@@ -3,7 +3,7 @@
 RESTORE_BASELINE_ERROR=${ERROR:-1}
 RESTORE_BASELINE_CONTINUE_ON_ERROR=${CONTINUE_ON_ERROR:-false}
 RESTORE_BASELINE_WORKING_FOLDER="${JOBS_FOLDER:-{{hosting_user_jobs_home}}}"
-RESTORE_BASELINE_OUTPUT_FOLDER="${OUTPUT_FOLDER:-{{hosting_user_jobs_output_home}}/$(date '+%Y-%m-%d')}/dstu2"
+RESTORE_BASELINE_OUTPUT_FOLDER="${OUTPUT_FOLDER:-.}"
 
 RESTORE_BASELINE_FILE=restore-dstu2-baseline-snapshot-response.json
 
