@@ -5,6 +5,9 @@
     - roles/common-role/defaults/main.yml
     - roles/linux-role/defaults/main.yml
     - roles/linux/defaults/main.yml
+    - roles/reference-api-role/defaults/main.yml
+    - roles/reference-auth-role/defaults/main.yml
+    - roles/reference-messaging-role/defaults/main.yml
     - environments/{{env}}.yml
   roles:
-    - reference-api-role
+    - api_dstu2

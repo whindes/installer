@@ -12,6 +12,9 @@ git clone https://github.com/smart-on-fhir/installer
 
 cd installer/provisioning
 
+# install the required galaxy roles
+ansible-galaxy install -r roles/requirements.yml -p ./roles/ --force
+
 # modify the group_vars for your environment
 #vi inventory/group_vars/all.yml
 

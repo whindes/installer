@@ -1,0 +1,12 @@
+# requirements.yml
+
+- src: git+http://bitbucket.org/hspconsortium/common-role.git
+
+- src: git+http://bitbucket.org/hspconsortium/linux-role.git
+
+- src: git+http://bitbucket.org/hspconsortium/reference-api-role.git
+
+- src: git+http://bitbucket.org/hspconsortium/reference-api-dstu2-role.git
+
+- src: git+http://bitbucket.org/hspconsortium/reference-api-stu3-role.git
+

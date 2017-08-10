@@ -5,5 +5,12 @@ vagrant/.*
 *.log
 *.retry
 
-provisioning/inventory/group_vars/prod.yml
-provisioning/inventory/group_vars/test.yml
+roles/linux-role/
+roles/geerlingguy.mysql/
+roles/geerlingguy.nginx/
+roles/common-role/
+roles/reference-api-dstu2-role/
+roles/reference-api-role/
+roles/reference-auth-role/
+roles/gantsign.maven/
+roles/geerlingguy.java/

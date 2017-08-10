@@ -104,11 +104,12 @@ sudo apt-get -y install curl git python-pycurl python-pip python-yaml python-par
 sudo pip install ansible==2.1.0
 git clone https://github.com/smart-on-fhir/installer
 cd installer/provisioning
+ansible-galaxy install -r roles/requirements.yml -p ./roles/ --force
 ```
 
 Modify the group_vars for your environment:
 ```
-vi inventory/group_vars/all.yml
+vi environments/{{env}}.yml
 ```
 
 * set "installer_user" to your ssh username
