@@ -66,6 +66,8 @@
     - "smart-logo.png"
     - "smart-logo@2x.png"
     - "smart-logo@3x.png"
+    - "smart-white-logo@2x.png"
+    - "smart-white-logo@3x.png"
 
 - name: "patch services (temporary)"
   become_user: "{{hosting_username}}"
