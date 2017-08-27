@@ -9,10 +9,10 @@ RESTORE_BASELINE_FILE=restore-dstu2-baseline-snapshot-response.json
 
 function RESTORE_BASELINE_handleLastError {
   echo $1
-  if [ ! $RESTORE_BASELINE_CONTINUE_ON_ERROR ]
-  then
+#  if [ ! $RESTORE_BASELINE_CONTINUE_ON_ERROR ]
+#  then
     exit $RESTORE_BASELINE_ERROR
-  fi
+#  fi
 }
 
 # restore the baseline

@@ -12,10 +12,10 @@ REMOVE_OUTPUT_FOLDER="{{hosting_user_jobs_output_home}}/$REMOVE_DATE/stu3"
 
 function handleLastError {
   echo $1
-  if [ ! $CONTINUE_ON_ERROR ]
-  then
+#  if [ ! $CONTINUE_ON_ERROR ]
+#  then
     exit $ERROR
-  fi
+#  fi
 }
 
 # only remove from the first script to execute
